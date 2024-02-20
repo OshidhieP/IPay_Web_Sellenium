@@ -4,26 +4,26 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LoginPage {
+public class LoginPage extends BaseClass{
+
+    private static final By USERNAME_FIELD = By.name("j_username_bank");
+    private static final By PASSWORD_FIELD = By.name("j_password_bank");
+    private static final By LOGIN_BUTTON = By.id("btnLoginSubmit");
+    private static final By ERROR_MESSAGE = By.xpath("//div[@class='alert alert-block alert-danger fade in']");
 
     public static void enterUsername(WebDriver driver, String username) {
-        WebElement usernameElement = driver.findElement(By.name("j_username_bank"));
-        usernameElement.sendKeys(username);
+        enterText(driver, USERNAME_FIELD, username);
     }
 
     public static void enterPassword(WebDriver driver, String password) {
-        WebElement passwordElement = driver.findElement(By.name("j_password_bank"));
-        passwordElement.sendKeys(password);
+        enterText(driver, PASSWORD_FIELD, password);
     }
 
     public static void clickLoginButton(WebDriver driver) {
-        WebElement loginButton = driver.findElement(By.id("btnLoginSubmit"));
-        loginButton.click();
+        clickElement(driver, LOGIN_BUTTON);
     }
 
-    // Check if the error message is displayed
     public static void isErrorMessageDisplayed(WebDriver driver) {
-            WebElement errorMessage = driver.findElement(By.xpath("//div[@class='alert alert-block alert-danger fade in']"));
-            errorMessage.isDisplayed();
+        clickElement(driver, ERROR_MESSAGE);
     }
 }

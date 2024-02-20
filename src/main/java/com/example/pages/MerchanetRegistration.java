@@ -7,26 +7,28 @@ import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.interactions.Actions;
 
-public class MerchanetRegistration {
+public class MerchanetRegistration extends BaseClass {
+
+    private static final By MERCHANT_LINK = By.xpath("//a/i[@class='fa fa-bookmark']");
+    private static final By MERCHANT_REG_LINK = By.xpath("//a[@href='/ipayBankApp/merchant/merchantEnrollment']");
+    private static final By BUSINESS_TYPE_DROPDOWN = By.id("businessType");
+    private static final By BUSINESS_TYPE_OPTION = By.xpath("//select[@id='businessType']/option[@value='1']");
+    private static final By NEXT_BUTTON_1 = By.id("btnNextStep1");
 
     public static void clickMerchant(WebDriver driver) {
-        WebElement merchant = driver.findElement(By.xpath("//a/i[@class='fa fa-bookmark']"));
-        merchant.click();
+        clickElement(driver, MERCHANT_LINK);
     }
 
     public static void clickMerchantReg(WebDriver driver) {
-        WebElement merchant = driver.findElement(By.xpath("//a[@href='/ipayBankApp/merchant/merchantEnrollment']"));
-        merchant.click();
+        clickElement(driver, MERCHANT_REG_LINK);
     }
 
     public static void clickBType(WebDriver driver){
-        WebElement merchant = driver.findElement(By.id("businessType"));
-        merchant.click();
+        clickElement(driver, BUSINESS_TYPE_DROPDOWN);
     }
 
     public static void clickType(WebDriver driver){
-        WebElement merchant = driver.findElement(By.xpath("//select[@id='businessType']/option[@value='1']"));
-        merchant.click();
+        clickElement(driver, BUSINESS_TYPE_OPTION);
     }
     public static void clickSelect(WebDriver driver){
         WebElement merchant = driver.findElement(By.id("btnSelect"));
@@ -45,8 +47,7 @@ public class MerchanetRegistration {
     }
 
     public static void clickNext(WebDriver driver){
-        WebElement merchant = driver.findElement(By.id("btnNextStep1"));
-        merchant.click();
+        clickElement(driver, NEXT_BUTTON_1);
     }
 
     public static void enterMerchantName(WebDriver driver, String merchantName){
