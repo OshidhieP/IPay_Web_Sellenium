@@ -6,7 +6,11 @@ import com.example.pages.LoginPage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
+
+import java.io.File;
 
 public class TestClass {
 
@@ -26,6 +30,7 @@ public class TestClass {
         LoginPage.clickLoginButton(driver);
     }
 
+    @DisplayName("Verify the response for merchant Customer registration using valid data")
     @Test
     public void merchantRegistration() throws InterruptedException {
         LoginPage.enterUsername(driver, "branchofficer.lofc");
@@ -51,7 +56,7 @@ public class TestClass {
         Thread.sleep(2000);
         MerchanetRegistration.enterNIC(driver, "200057200456");
         Thread.sleep(2000);
-        String imagePath = "D:\\IPay QA Example\\IPay_Web_Sellenium\\src\\main\\resources\\images\\nic.jpg";
+        String imagePath = new File("src/main/resources/images/nic.jpg").getAbsolutePath();
         MerchanetRegistration.uploadNic(driver, imagePath);
         MerchanetRegistration.adressLine1(driver, "100/1");
         MerchanetRegistration.adressLine2(driver, "Malwatta Road");
@@ -71,10 +76,43 @@ public class TestClass {
     @Test
     public void loginWithInvalidCredentials() {
         LoginPage.enterUsername(driver, "shan.lofc");
+
         LoginPage.enterPassword(driver, "1234");
         LoginPage.clickLoginButton(driver);
 
         LoginPage.isErrorMessageDisplayed(driver);
+    }
+
+    @DisplayName("Verify the response for merchant Customer registration without entering mandatory field")
+    @Test
+    public void merchantRegistrationNegative() throws InterruptedException {
+        LoginPage.enterUsername(driver, "branchofficer.lofc");
+        LoginPage.enterPassword(driver, "123456");
+        LoginPage.clickLoginButton(driver);
+        Thread.sleep(2000);
+        //Merchant Registration Start
+        MerchanetRegistration.clickMerchant(driver);
+        MerchanetRegistration.clickMerchantReg(driver);
+        MerchanetRegistration.clickNext(driver);
+        MerchanetRegistration.isErrorMessageDisplayed(driver);
+    }
+
+    @DisplayName("Verify the response for merchant Customer registration without entering mandatory field")
+    @Test
+    public void merchantNameInvalidInRegistration() throws InterruptedException {
+        LoginPage.enterUsername(driver, "branchofficer.lofc");
+        LoginPage.enterPassword(driver, "123456");
+        LoginPage.clickLoginButton(driver);
+        //Merchant Registration Start
+        MerchanetRegistration.clickMerchant(driver);
+        MerchanetRegistration.clickMerchantReg(driver);
+        MerchanetRegistration.clickBType(driver);
+        Thread.sleep(2000);
+        MerchanetRegistration.clickType(driver);
+        MerchanetRegistration.clickSelect(driver);
+        Thread.sleep(4000);
+        MerchanetRegistration.empNoSearch(driver,"000000");
+        MerchanetRegistration.errorMessageInIntroducer(driver);
     }
 
     @After

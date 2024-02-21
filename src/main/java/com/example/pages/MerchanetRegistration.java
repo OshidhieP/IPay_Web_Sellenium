@@ -14,6 +14,8 @@ public class MerchanetRegistration extends BaseClass {
     private static final By BUSINESS_TYPE_DROPDOWN = By.id("businessType");
     private static final By BUSINESS_TYPE_OPTION = By.xpath("//select[@id='businessType']/option[@value='1']");
     private static final By NEXT_BUTTON_1 = By.id("btnNextStep1");
+    private static final By ERROR_MESSAGE = By.xpath("(//span[@class='help-block'])[1]");
+    private static final By ERROR_MESSAGE_INTRODUCER = By.xpath("//span[@class='k-pager-info k-label']");
 
     public static void clickMerchant(WebDriver driver) {
         clickElement(driver, MERCHANT_LINK);
@@ -135,5 +137,13 @@ public class MerchanetRegistration extends BaseClass {
     public static void finish(WebDriver driver){
         WebElement next = driver.findElement(By.id("btnFinish"));
         next.click();
+    }
+
+    public static void isErrorMessageDisplayed(WebDriver driver) {
+        clickElement(driver, ERROR_MESSAGE);
+    }
+
+    public static void errorMessageInIntroducer(WebDriver driver) {
+        clickElement(driver, ERROR_MESSAGE_INTRODUCER);
     }
 }
