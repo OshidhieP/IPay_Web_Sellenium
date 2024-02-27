@@ -7,7 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
@@ -76,10 +75,8 @@ public class TestClass {
     @Test
     public void loginWithInvalidCredentials() {
         LoginPage.enterUsername(driver, "shan.lofc");
-
         LoginPage.enterPassword(driver, "1234");
         LoginPage.clickLoginButton(driver);
-
         LoginPage.isErrorMessageDisplayed(driver);
     }
 
@@ -112,6 +109,7 @@ public class TestClass {
         MerchanetRegistration.clickSelect(driver);
         Thread.sleep(4000);
         MerchanetRegistration.empNoSearch(driver,"000000");
+        Thread.sleep(2000);
         MerchanetRegistration.errorMessageInIntroducer(driver);
     }
 
