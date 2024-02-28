@@ -153,6 +153,14 @@ public class MerchantRegistration extends BaseClass {
         clickElement(driver, FINISH);
     }
 
+    public static void invalidMessage(WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(5000));
+        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(INVALID_MESSAGE));
+        Assert.assertEquals("Server error. Please try again later.", "Server error. Please try again later.");
+        System.out.println("Actual Error Message: " + errorMessage.getText());
+    }
+
+    //invalid
     public static void isErrorMessageDisplayed(WebDriver driver) {
         clickElement(driver, ERROR_MESSAGE);
     }
@@ -161,10 +169,5 @@ public class MerchantRegistration extends BaseClass {
         clickElement(driver, ERROR_MESSAGE_INTRODUCER);
     }
 
-    public static void invalidMessage(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(5000));
-        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(INVALID_MESSAGE));
-        Assert.assertEquals("Server error. Please try again later.", "Server error. Please try again later.");
-        System.out.println("Actual Error Message: " + errorMessage.getText());
-    }
+
 }

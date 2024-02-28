@@ -16,6 +16,8 @@ public class LoginPage extends BaseClass{
     private static final By LOGIN_BUTTON = By.id("btnLoginSubmit");
     private static final By ERROR_MESSAGE = By.xpath("//div[@class='alert alert-block alert-danger fade in']");
     private static final By VALID_MESSAGE = By.linkText("iPay Bank Portal - LOLC Finance PLC | City Branch");
+    private static final By INVALID_1 = By.xpath("//a[@class ='user-profile dropdown-toggle']");
+    private static final By INVALID_2 = By.id("logout");
 
     public static void enterUsername(WebDriver driver, String username) {
         enterText(driver, USERNAME_FIELD, username);
@@ -28,6 +30,14 @@ public class LoginPage extends BaseClass{
     public static void clickLoginButton(WebDriver driver) {
         clickElement(driver, LOGIN_BUTTON);
     }
+
+    public static void invalid1(WebDriver driver) {
+        clickElement(driver, INVALID_1);
+    }
+    public static void invalid2(WebDriver driver) {
+        clickElement(driver, INVALID_2);
+    }
+
 
     public static void validMessage(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1000));

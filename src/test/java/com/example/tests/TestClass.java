@@ -64,6 +64,8 @@ public class TestClass {
 
     @Test
     public void loginWithInvalidCredentials() {
+        LoginPage.invalid1(driver);
+        LoginPage.invalid2(driver);
         LoginPage.enterUsername(driver, "shan.lofc");
         LoginPage.enterPassword(driver, "1234");
         LoginPage.clickLoginButton(driver);
