@@ -1,0 +1,19 @@
+{
+  "validUsername": "branchofficer.lofc",
+  "validPassword": "123456",
+  "invalidUsername": "shan.lofc",
+  "invalidPassword": "1234",
+  "validEmpNo": "20291",
+  "merchantName": "Oshidhie",
+  "businessCode": "1111111111",
+  "businessCategory": "Books & Stationery Shops",
+  "nicNumber": "200057200456",
+  "addressLine1": "100/1",
+  "addressLine2": "Malwatta Road",
+  "city": "Dehiwala",
+  "merchantUsername": "OshidhieP",
+  "merchantMobileNo": "0771414181",
+  "bankName": "LOLC Finance PLC",
+  "accountNumber": "10173256032",
+  "invalidEmpNo" : "000000"
+}

@@ -1,8 +1,10 @@
 package com.example.tests;
 
 import com.example.pages.MerchantRegistration;
+import com.example.utils.TestDataLoader;
 import com.example.webdriver.DriverInitialization;
 import com.example.pages.LoginPage;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,9 +16,11 @@ import java.io.File;
 public class TestClass {
 
     private WebDriver driver;
+    private static JSONObject testData;
 
     @BeforeClass
     public void setUp() {
+        testData = TestDataLoader.loadTestData();
         driver = DriverInitialization.initializeDriver();
         driver.get("https://developer.ipay.lk/ipayBankApp/login");
         driver.manage().window().maximize();
@@ -24,8 +28,8 @@ public class TestClass {
 
     @BeforeMethod
     public void login (){
-        LoginPage.enterUsername(driver, "branchofficer.lofc");
-        LoginPage.enterPassword(driver, "123456");
+        LoginPage.enterUsername(driver, testData.get("validUsername").toString());
+        LoginPage.enterPassword(driver, testData.get("validPassword").toString());
         LoginPage.clickLoginButton(driver);
 //        LoginPage.validMessage(driver);
     }
@@ -37,27 +41,27 @@ public class TestClass {
         MerchantRegistration.clickBType(driver);
         MerchantRegistration.clickType(driver);
         MerchantRegistration.clickSelect(driver);
-        MerchantRegistration.empNoSearch(driver,"20291");
+        MerchantRegistration.empNoSearch(driver, testData.get("validEmpNo").toString());
         MerchantRegistration.clickEmpNoSearch(driver);
         MerchantRegistration.clickNext(driver);
-        MerchantRegistration.enterMerchantName(driver,"Oshidhie");
-        MerchantRegistration.enterBCode(driver, "1111111111");
-        MerchantRegistration.bCategory(driver, "Books & Stationery Shops");
+        MerchantRegistration.enterMerchantName(driver, testData.get("merchantName").toString());
+        MerchantRegistration.enterBCode(driver, testData.get("businessCode").toString());
+        MerchantRegistration.bCategory(driver, testData.get("businessCategory").toString());
         MerchantRegistration.next1(driver);
-        MerchantRegistration.enterNIC(driver, "200057200456");
+        MerchantRegistration.enterNIC(driver, testData.get("nicNumber").toString());
         String imagePath = new File("src/main/resources/images/nic.jpg").getAbsolutePath();
         MerchantRegistration.uploadNic(driver, imagePath);
-        MerchantRegistration.addressLine1(driver, "100/1");
-        MerchantRegistration.addressLine2(driver, "Malwatta Road");
-        MerchantRegistration.cityEnter(driver, "Dehiwala");
+        MerchantRegistration.addressLine1(driver, testData.get("addressLine1").toString());
+        MerchantRegistration.addressLine2(driver, testData.get("addressLine2").toString());
+        MerchantRegistration.cityEnter(driver, testData.get("city").toString());
         Thread.sleep(3000);
         MerchantRegistration.next2(driver);
-        MerchantRegistration.mUsername(driver, "OshidhieP");
-        MerchantRegistration.mMobileNo(driver, "0771414181");
+        MerchantRegistration.mUsername(driver, testData.get("merchantUsername").toString());
+        MerchantRegistration.mMobileNo(driver, testData.get("merchantMobileNo").toString());
         Thread.sleep(3000);
         MerchantRegistration.next3(driver);
-        MerchantRegistration.bank(driver, "LOLC Finance PLC");
-        MerchantRegistration.accNo(driver, "10173256032");
+        MerchantRegistration.bank(driver, testData.get("bankName").toString());
+        MerchantRegistration.accNo(driver, testData.get("accountNumber").toString());
         MerchantRegistration.finish(driver);
 //        MerchantRegistration.invalidMessage(driver);
     }
@@ -66,8 +70,8 @@ public class TestClass {
     public void loginWithInvalidCredentials() {
         LoginPage.invalid1(driver);
         LoginPage.invalid2(driver);
-        LoginPage.enterUsername(driver, "shan.lofc");
-        LoginPage.enterPassword(driver, "1234");
+        LoginPage.enterUsername(driver, testData.get("invalidUsername").toString());
+        LoginPage.enterPassword(driver, testData.get("invalidPassword").toString());
         LoginPage.clickLoginButton(driver);
         LoginPage.isErrorMessageDisplayed(driver);
     }
@@ -87,7 +91,7 @@ public class TestClass {
         MerchantRegistration.clickBType(driver);
         MerchantRegistration.clickType(driver);
         MerchantRegistration.clickSelect(driver);
-        MerchantRegistration.empNoSearch(driver,"000000");
+        MerchantRegistration.empNoSearch(driver, testData.get("invalidEmpNo").toString());
         MerchantRegistration.errorMessageInIntroducer(driver);
     }
 
