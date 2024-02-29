@@ -37,7 +37,7 @@ public class TestClass {
 
     @Test(testName = "Validate the Success Login", priority = 1)
     public void loginValidation() {
-        LoginPage.validMessage(driver);
+        LoginPage.validMessage(driver);//Assertion
     }
 
     @Test(testName = "Verify the response for merchant Customer registration using valid data", priority = 1)
@@ -70,17 +70,17 @@ public class TestClass {
         MerchantRegistration.bank(driver, testData.get("bankName").toString());
         MerchantRegistration.accNo(driver, testData.get("accountNumber").toString());
         MerchantRegistration.finish(driver);
-        MerchantRegistration.invalidMessage(driver);
+        MerchantRegistration.invalidMessage(driver);//Assertion
     }
 
     @Test(priority = 2)
     public void loginWithInvalidCredentials() {
-        LoginPage.invalid1(driver);
-        LoginPage.invalid2(driver);
+        LoginPage.click1(driver);
+        LoginPage.click2(driver);
         LoginPage.enterUsername(driver, testData.get("invalidUsername").toString());
         LoginPage.enterPassword(driver, testData.get("invalidPassword").toString());
         LoginPage.clickLoginButton(driver);
-        LoginPage.isErrorMessageDisplayed(driver);
+        LoginPage.isErrorMessageDisplayed(driver);//Assertion
     }
 
     @Test(testName = "Verify the response for merchant Customer registration without entering mandatory field", priority = 3)

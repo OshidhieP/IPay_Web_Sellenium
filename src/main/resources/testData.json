@@ -15,5 +15,7 @@
   "merchantMobileNo": "0771414181",
   "bankName": "LOLC Finance PLC",
   "accountNumber": "10173256032",
-  "invalidEmpNo" : "000000"
+  "invalidEmpNo" : "000000",
+  "invalidNicNumber": "200057200456111",
+  "invalidMobileNo": "011245987541"
 }
