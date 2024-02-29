@@ -42,14 +42,14 @@ public class LoginPage extends BaseClass{
     public static void validMessage(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(VALID_MESSAGE));
-        Assert.assertEquals("iPay Bank Portal - LOLC Finance PLC | City Branch", "iPay Bank Portal - LOLC Finance PLC | City Branch");
+        Assert.assertEquals(errorMessage.getText(), "iPay Bank Portal - LOLC Finance PLC | City Branch");
         System.out.println("Actual Error Message: " + errorMessage.getText());
     }
 
     public static void isErrorMessageDisplayed(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1000));
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
-        Assert.assertEquals("Invalid Username or Password", "Invalid Username or Password");
+        Assert.assertEquals(errorMessage.getText(), "Invalid Username or Password");
         System.out.println("Actual Error Message: " + errorMessage.getText());
     }
 }

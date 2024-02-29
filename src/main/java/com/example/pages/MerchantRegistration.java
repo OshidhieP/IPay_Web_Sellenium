@@ -42,7 +42,7 @@ public class MerchantRegistration extends BaseClass {
     private static final By FINISH = By.id("btnFinish");
     private static final By INVALID_MESSAGE = By.xpath("//div[@class='jconfirm-content']");
     private static final By INVALID_MESSAGE_NIC = By.xpath("(//span[@class='help-block']) [1]");
-    private static final By INVALID_MESSAGE_M_MOBILE_NO = By.xpath("(//span[@class='help-block']) [2]");
+    private static final By INVALID_MESSAGE_M_MOBILE_NO = By.xpath("//span[@class='help-block']");
 
     public static void clickMerchant(WebDriver driver) {
         clickElement(driver, MERCHANT_LINK);
@@ -167,20 +167,20 @@ public class MerchantRegistration extends BaseClass {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(INVALID_MESSAGE));
         //Assert.assertEquals("We have trouble connecting to your bank. Please try again in a little while.", "We have trouble connecting to your bank. Please try again in a little while.");
-        Assert.assertEquals("Server error. Please try again later.", "Server error. Please try again later.");
+        Assert.assertEquals(errorMessage.getText(), "Server error. Please try again later.");
         System.out.println("Actual Error Message: " + errorMessage.getText());
     }
     public static void invalidNIC(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(INVALID_MESSAGE_NIC));
-        Assert.assertEquals("Please enter no more than 12 characters.", "Please enter no more than 12 characters.");
+        Assert.assertEquals(errorMessage.getText(), "Please enter no more than 12 characters.");
         System.out.println("Actual Error Message: " + errorMessage.getText());
     }
 
     public static void invalidMerchantMobileNo(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(INVALID_MESSAGE_M_MOBILE_NO));
-        Assert.assertEquals("Please enter a valid mobile no.", "Please enter a valid mobile no.");
+        Assert.assertEquals(errorMessage.getText(), "Please enter a valid mobile no.");
         System.out.println("Actual Error Message: " + errorMessage.getText());
     }
 
