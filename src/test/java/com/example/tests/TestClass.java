@@ -135,6 +135,7 @@ public class TestClass {
         MerchantRegistration.clickSelect(driver);
         MerchantRegistration.empNoSearch(driver, testData.get("validEmpNo").toString());
         MerchantRegistration.clickEmpNoSearch(driver);
+        Thread.sleep(3000);
         MerchantRegistration.clickNext(driver);
         MerchantRegistration.enterMerchantName(driver, testData.get("merchantName").toString());
         MerchantRegistration.enterBCode(driver, testData.get("businessCode").toString());
