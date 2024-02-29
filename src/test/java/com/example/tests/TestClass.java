@@ -6,10 +6,7 @@ import com.example.webdriver.DriverInitialization;
 import com.example.pages.LoginPage;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 
@@ -18,23 +15,32 @@ public class TestClass {
     private WebDriver driver;
     private static JSONObject testData;
 
-    @BeforeClass
-    public void setUp() {
+//    @BeforeClass
+//    public void setUp() {
+//        testData = TestDataLoader.loadTestData();
+//        driver = DriverInitialization.initializeDriver();
+//        driver.get("https://developer.ipay.lk/ipayBankApp/login");
+//        driver.manage().window().maximize();
+//    }
+
+    @BeforeMethod
+    public void login (){
         testData = TestDataLoader.loadTestData();
         driver = DriverInitialization.initializeDriver();
         driver.get("https://developer.ipay.lk/ipayBankApp/login");
         driver.manage().window().maximize();
-    }
-
-    @BeforeMethod
-    public void login (){
         LoginPage.enterUsername(driver, testData.get("validUsername").toString());
         LoginPage.enterPassword(driver, testData.get("validPassword").toString());
         LoginPage.clickLoginButton(driver);
-//        LoginPage.validMessage(driver);
+
     }
 
-    @Test(testName = "Verify the response for merchant Customer registration using valid data")
+    @Test(testName = "Validate the Success Login", priority = 1)
+    public void loginValidation() {
+        LoginPage.validMessage(driver);
+    }
+
+    @Test(testName = "Verify the response for merchant Customer registration using valid data", priority = 1)
     public void merchantRegistration() throws InterruptedException {
         MerchantRegistration.clickMerchant(driver);
         MerchantRegistration.clickMerchantReg(driver);
@@ -56,6 +62,7 @@ public class TestClass {
         MerchantRegistration.cityEnter(driver, testData.get("city").toString());
         Thread.sleep(3000);
         MerchantRegistration.next2(driver);
+        Thread.sleep(2000);
         MerchantRegistration.mUsername(driver, testData.get("merchantUsername").toString());
         MerchantRegistration.mMobileNo(driver, testData.get("merchantMobileNo").toString());
         Thread.sleep(3000);
@@ -63,10 +70,10 @@ public class TestClass {
         MerchantRegistration.bank(driver, testData.get("bankName").toString());
         MerchantRegistration.accNo(driver, testData.get("accountNumber").toString());
         MerchantRegistration.finish(driver);
-//        MerchantRegistration.invalidMessage(driver);
+        MerchantRegistration.invalidMessage(driver);
     }
 
-    @Test
+    @Test(priority = 2)
     public void loginWithInvalidCredentials() {
         LoginPage.invalid1(driver);
         LoginPage.invalid2(driver);
@@ -76,7 +83,7 @@ public class TestClass {
         LoginPage.isErrorMessageDisplayed(driver);
     }
 
-    @Test(testName = "Verify the response for merchant Customer registration without entering mandatory field")
+    @Test(testName = "Verify the response for merchant Customer registration without entering mandatory field", priority = 3)
     public void merchantRegistrationNegative() {
         MerchantRegistration.clickMerchant(driver);
         MerchantRegistration.clickMerchantReg(driver);
@@ -84,7 +91,7 @@ public class TestClass {
         MerchantRegistration.isErrorMessageDisplayed(driver);
     }
 
-    @Test(testName = "Invalid data enter")
+    @Test(testName = "Invalid data enter", priority = 4)
     public void merchantNameInvalidInRegistration() {
         MerchantRegistration.clickMerchant(driver);
         MerchantRegistration.clickMerchantReg(driver);
@@ -95,8 +102,10 @@ public class TestClass {
         MerchantRegistration.errorMessageInIntroducer(driver);
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
+
+
 }

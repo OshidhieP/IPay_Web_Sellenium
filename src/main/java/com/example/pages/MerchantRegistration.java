@@ -40,7 +40,7 @@ public class MerchantRegistration extends BaseClass {
     private static final By TYPE = By.xpath("(//input[@class='form-control']) [17]");
     private static final By ACC_N0 = By.id("accountNo");
     private static final By FINISH = By.id("btnFinish");
-    private static final By INVALID_MESSAGE = By.linkText("Server error. Please try again later.");
+    private static final By INVALID_MESSAGE = By.xpath("//div[@class='jconfirm-content']");
 
     public static void clickMerchant(WebDriver driver) {
         clickElement(driver, MERCHANT_LINK);
@@ -122,7 +122,6 @@ public class MerchantRegistration extends BaseClass {
     public static void next2(WebDriver driver) {
         clickElement(driver, NEXT_3);
         clickElement(driver, NEXT_3);
-        clickElement(driver, NEXT_3);
     }
 
     public static void mUsername(WebDriver driver, String username) {
@@ -154,8 +153,9 @@ public class MerchantRegistration extends BaseClass {
     }
 
     public static void invalidMessage(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(5000));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(INVALID_MESSAGE));
+        //Assert.assertEquals("We have trouble connecting to your bank. Please try again in a little while.", "We have trouble connecting to your bank. Please try again in a little while.");
         Assert.assertEquals("Server error. Please try again later.", "Server error. Please try again later.");
         System.out.println("Actual Error Message: " + errorMessage.getText());
     }

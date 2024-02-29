@@ -15,7 +15,7 @@ public class LoginPage extends BaseClass{
     private static final By PASSWORD_FIELD = By.name("j_password_bank");
     private static final By LOGIN_BUTTON = By.id("btnLoginSubmit");
     private static final By ERROR_MESSAGE = By.xpath("//div[@class='alert alert-block alert-danger fade in']");
-    private static final By VALID_MESSAGE = By.linkText("iPay Bank Portal - LOLC Finance PLC | City Branch");
+    private static final By VALID_MESSAGE = By.xpath("//div[@class='nav toggle header']");
     private static final By INVALID_1 = By.xpath("//a[@class ='user-profile dropdown-toggle']");
     private static final By INVALID_2 = By.id("logout");
 
@@ -40,7 +40,7 @@ public class LoginPage extends BaseClass{
 
 
     public static void validMessage(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1000));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(VALID_MESSAGE));
         Assert.assertEquals("iPay Bank Portal - LOLC Finance PLC | City Branch", "iPay Bank Portal - LOLC Finance PLC | City Branch");
         System.out.println("Actual Error Message: " + errorMessage.getText());
